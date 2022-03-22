@@ -1,43 +1,43 @@
 def make_permuterm():
   ind = 1
-inverted_index = {}
-files_ind = {}
-for file in glob.iglob(f'{file_folder}/*'):
-    fname = file
-    file = open(file, "r")
-    text = file.read()
-    files_ind[ind] = os.path.basename(fname)
-    text = remove_special_characters(text)
-    text = re.sub(re.compile('\d'),'',text)
-    # sentences = sent_tokenize(text)                                  # Refer above
-    words = word_tokenize(text)
-    words = [word for word in words if len(words)>1]
-    words = [word.lower() for word in words]
-    words = [word for word in words if word not in Stopwords]
-    words = [ps.stem(word) for word in words]
-    words = [word.lower() for word in words]
-    
-    for word in words:                                    
-      perms = list()                              # List for all permutations of that word
-      n = len(word)                               #
-      temp = list(word)                           # Conver word to list
-      temp.append("$")                            # and append $
+  inverted_index = {}
+  files_ind = {}
+  for file in glob.iglob(f'{file_folder}/*'):
+      fname = file
+      file = open(file, "r")
+      text = file.read()
+      files_ind[ind] = os.path.basename(fname)
+      text = remove_special_characters(text)
+      text = re.sub(re.compile('\d'),'',text)
+      # sentences = sent_tokenize(text)                                  # Refer above
+      words = word_tokenize(text)
+      words = [word for word in words if len(words)>1]
+      words = [word.lower() for word in words]
+      words = [word for word in words if word not in Stopwords]
+      words = [ps.stem(word) for word in words]
+      words = [word.lower() for word in words]
 
-      i = 1                                       
-      while i<=n+1:                               
-        ans = "".join(temp)                       # Convert list to word
-        perms.append(ans)                         # Append to perms list
-        r = temp.pop()                            # Do for all permutations
-        temp.insert(0,r)                          
-        i+=1
+      for word in words:                                    
+        perms = list()                              # List for all permutations of that word
+        n = len(word)                               #
+        temp = list(word)                           # Conver word to list
+        temp.append("$")                            # and append $
 
-      for word in perms:
-        if word not in inverted_index.keys():     # Build inverted index 
-          inverted_index[word] = {ind}            # for all permuatations
-        else:
-          inverted_index[word].add(ind) 
+        i = 1                                       
+        while i<=n+1:                               
+          ans = "".join(temp)                       # Convert list to word
+          perms.append(ans)                         # Append to perms list
+          r = temp.pop()                            # Do for all permutations
+          temp.insert(0,r)                          
+          i+=1
 
-    ind+=1
+        for word in perms:
+          if word not in inverted_index.keys():     # Build inverted index 
+            inverted_index[word] = {ind}            # for all permuatations
+          else:
+            inverted_index[word].add(ind) 
+
+      ind+=1
     
     
     
