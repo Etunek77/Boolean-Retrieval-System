@@ -1,6 +1,6 @@
 def build_inverted_index():
     dict_global = {}   # dict_global dictionary 
-    file_folder = '/content/drive/MyDrive/DATASET'  # folder containing all documents
+    file_folder = 'https://github.com/Etunek77/Boolean-Retrieval-System/tree/main/DATASET'  # folder containing all documents
     idx = 1   # number the documents starting from 1
     files_with_index = {}    # dictionary having filename and its index {filename, file index}
     for file in glob.iglob(f'{file_folder}/*'):
