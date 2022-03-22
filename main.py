@@ -11,6 +11,7 @@ from nltk.stem import PorterStemmer
 Stopwords = set(stopwords.words('english'))
 ps= PorterStemmer()
 import itertools
+from helper import finding_all_unique_words_and_freq , finding_freq_of_word_in_doc , remove_special_characters , contains_star , edit_distance
 
 query = input('Enter your query:')
 query = query.lower()
